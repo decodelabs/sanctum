@@ -99,5 +99,21 @@ $hash = $csp->hashContent($script, 'script-src');
 ```
 
 
+Sanctum also provides an optional [Archetype](https://github.com/decodelabs/archetype) loader:
+
+```php
+namespace DecodeLabs\Sanctum\Definition;
+
+use DecodeLabs\Sanctum\Definition;
+
+class MyCsp extends Definition {}
+
+$csp = Definition::load('MyCsp');
+$csp->exportHeaders();
+```
+
+Archetype will look for implementations in the root namespace (<code>DecodeLabs\Sanctum\Definition</code>) by default. If you want to host your implementations in a different namespace, you should create and register a new [Archetype resolver](https://github.com/decodelabs/archetype) to find them.
+
+
 ## Licensing
 Sanctum is licensed under the MIT License. See [LICENSE](./LICENSE) for the full license text.
