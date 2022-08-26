@@ -762,7 +762,7 @@ abstract class Definition implements
             $this->reportUri !== null &&
             $this->reportTo !== null
         ) {
-            $output['Reporting-Endpoints'] = $this->reportTo.'="'.$this->reportUri.'"';
+            $output['Reporting-Endpoints'] = $this->reportTo . '="' . $this->reportUri . '"';
         }
 
 
@@ -807,12 +807,12 @@ abstract class Definition implements
 
 
     /**
-     * @param string|array<string>|null
+     * @param string|array<string>|null $value
      */
     protected function exportDirective(
         string $name,
         string|array|null $value
-    ) {
+    ): string {
         $directive = $name;
 
         if (!empty($value)) {
