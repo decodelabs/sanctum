@@ -84,20 +84,23 @@ Content-Security-Policy =>
 */
 ```
 
+### Hashes
 
 Make use of the hash feature for scripts - see https://content-security-policy.com/hash/ for explanation
 
 ```php
-$script = 'doSomething();'; // Your JS
-
 /*
 HTML:
 <script>doSomething();</script>
 */
+$script = 'doSomething();'; // Your JS
 
+
+// Adds sha256-xxx hash to CSP directive
 $hash = $csp->hashContent($script, 'script-src');
 ```
 
+## Archetype loader
 
 Sanctum also provides an optional [Archetype](https://github.com/decodelabs/archetype) loader:
 
