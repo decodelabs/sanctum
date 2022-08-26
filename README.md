@@ -1,4 +1,4 @@
-# Pandora
+# Sanctum
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/decodelabs/sanctum?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
 [![Latest Version](https://img.shields.io/packagist/v/decodelabs/sanctum.svg?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
