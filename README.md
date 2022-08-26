@@ -18,7 +18,86 @@ composer require decodelabs/sanctum
 
 ## Usage
 
-Coming shortly...
+Sanctum allows you to create Content Security Policies with ease.
+Please see https://content-security-policy.com/ for a full list of directives.
+
+Create your definition:
+
+```php
+use DecodeLabs\Sanctum\Definition;
+
+class MyCsp extends Definition {
+
+    // These items can be reused in other directives
+    const SHARED_SRC = [
+        '@self', // Resolves to 'self'
+        '*.myotherdomain.com'
+    ];
+
+    // These items create the default-src directive
+    const DEFAULT_SRC = [
+        '@shared-src', // Import items from SHARED_SRC
+    ];
+
+    // These define script sources
+    const SCRIPT_SRC = [
+        '@nonce', // Creates a unique nonce to be used in markup
+        '@unsafe-inline', // Resolves to 'unsafe-inline'
+
+        '@strict-dynamic',
+        '@https',
+        '@http'
+    ];
+
+    // These define image sources
+    const IMG_SRC = [
+        '@shared', // Import items from SHARED_SRC
+        '@data', // Resolves to data: for data URLs
+        '*.myimagecdn.net',
+        '!*.myotherdomain.com' // Exclude importing from SHARED_SRC
+    ];
+
+
+    // Report endpoint
+    const REPORT_URI = 'https://mydomain.com/report';
+}
+```
+
+
+Then in your HTTP handler:
+
+```php
+$csp = new MyCsp();
+
+foreach($csp->exportHeaders() as $header => $value) {
+    $response->setHeader($header, $value);
+}
+
+/*
+Reporting-Endpoints => sanctum-csp-report="https://mydomain.com/report"
+Content-Security-Policy =>
+    default-src 'self' *.myotherdomain.com;
+    script-src nonce-98b88fa48f23911d6fc1f5092efb2e36d76423ce4f5d7ef42765a2c2501d57c9' 'unsafe-inline' 'strict-dynamic' https: http:;
+    img-src 'self' data: *.myimagecdn.net;
+    report-uri https://mydomain.com/report;
+    report-to sanctum-csp-report
+*/
+```
+
+
+Make use of the hash feature for scripts - see https://content-security-policy.com/hash/ for explanation
+
+```php
+$script = 'doSomething();'; // Your JS
+
+/*
+HTML:
+<script>doSomething();</script>
+*/
+
+$hash = $csp->hashContent($script, 'script-src');
+```
+
 
 ## Licensing
 Sanctum is licensed under the MIT License. See [LICENSE](./LICENSE) for the full license text.
