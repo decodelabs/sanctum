@@ -24,6 +24,11 @@ abstract class Definition implements
     public const ACTIVE = true;
 
     /**
+     * @var bool
+     */
+    public const REPORT = true;
+
+    /**
      * @var array<string>
      */
     public const SHARED_SRC = [];
@@ -166,6 +171,8 @@ abstract class Definition implements
     ];
 
     protected bool $active = true;
+    protected bool $report = true;
+
     protected ?string $nonce = null;
     protected ?string $reportUri = null;
     protected ?string $reportTo = null;
@@ -209,6 +216,11 @@ abstract class Definition implements
         // Active
         if (is_bool(static::ACTIVE)) {
             $this->active = static::ACTIVE;
+        }
+
+        // Report
+        if (is_bool(static::REPORT)) {
+            $this->report = static::REPORT;
         }
 
 
@@ -421,6 +433,23 @@ abstract class Definition implements
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+
+    /**
+     * Set reporting
+     */
+    public function setReportingActive(bool $report): void
+    {
+        $this->report = $report;
+    }
+
+    /**
+     * Is reporting active
+     */
+    public function isReportingActive(): bool
+    {
+        return $this->report;
     }
 
 
@@ -757,8 +786,16 @@ abstract class Definition implements
     {
         $output = [];
 
+        if (
+            !$this->active &&
+            !$this->report
+        ) {
+            return $output;
+        }
+
         // Report endpoints
         if (
+            $this->report &&
             $this->reportUri !== null &&
             $this->reportTo !== null
         ) {
@@ -794,12 +831,14 @@ abstract class Definition implements
             $output[$name] = $this->exportDirective($name, $set);
         }
 
-        if ($this->reportUri !== null) {
-            $output['report-uri'] = $this->exportDirective('report-uri', $this->reportUri);
-        }
+        if ($this->report) {
+            if ($this->reportUri !== null) {
+                $output['report-uri'] = $this->exportDirective('report-uri', $this->reportUri);
+            }
 
-        if ($this->reportTo !== null) {
-            $output['report-to'] = $this->exportDirective('report-to', $this->reportTo);
+            if ($this->reportTo !== null) {
+                $output['report-to'] = $this->exportDirective('report-to', $this->reportTo);
+            }
         }
 
         return $output;
@@ -837,6 +876,7 @@ abstract class Definition implements
     {
         yield 'properties' => [
             '*active' => $this->active,
+            '*report' => $this->report,
             'report-uri' => $this->reportUri,
             'report-to' => $this->reportTo
         ];
