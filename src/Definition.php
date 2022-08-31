@@ -786,13 +786,6 @@ abstract class Definition implements
     {
         $output = [];
 
-        if (
-            !$this->active &&
-            !$this->report
-        ) {
-            return $output;
-        }
-
         // Report endpoints
         if (
             $this->report &&
