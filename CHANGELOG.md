@@ -1,3 +1,5 @@
+* Updated composer check script
+
 ## v0.1.2 (2022-08-31)
 * Maintain report header if reporting disabled
 
