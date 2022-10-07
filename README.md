@@ -7,7 +7,13 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/sanctum?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
 
-Define and deploy Content Security Policies in your PHP application.
+### Content Security Policies for your PHP application.
+
+Sanctum allows you to create and deploy Content Security Policies with ease. Take the guesswork out of this important security feature.
+
+_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
+
+---
 
 
 ## Installation
@@ -17,9 +23,6 @@ composer require decodelabs/sanctum
 ```
 
 ## Usage
-
-Sanctum allows you to create Content Security Policies with ease.
-Please see https://content-security-policy.com/ for a full list of directives.
 
 Create your definition:
 
@@ -63,6 +66,7 @@ class MyCsp extends Definition {
 }
 ```
 
+Please see https://content-security-policy.com/ for a full list of directives.
 
 Then in your HTTP handler:
 
