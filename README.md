@@ -3,7 +3,7 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/decodelabs/sanctum?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
 [![Latest Version](https://img.shields.io/packagist/v/decodelabs/sanctum.svg?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
 [![Total Downloads](https://img.shields.io/packagist/dt/decodelabs/sanctum.svg?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/decodelabs/sanctum/Integrate)](https://github.com/decodelabs/sanctum/actions/workflows/integrate.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/decodelabs/sanctum/integrate.yml?branch=develop)](https://github.com/decodelabs/sanctum/actions/workflows/integrate.yml)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/sanctum?style=flat)](https://packagist.org/packages/decodelabs/sanctum)
 
