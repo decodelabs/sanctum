@@ -13,7 +13,8 @@
 
         "decodelabs/archetype": "^0.2.2",
         "decodelabs/glitch-support": "^0.4",
-        "decodelabs/exceptional": "^0.4"
+        "decodelabs/exceptional": "^0.4",
+        "psr/http-message": "^2.0"
     },
     "require-dev": {
         "decodelabs/phpstan-decodelabs": "^0.6"

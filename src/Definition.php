@@ -12,6 +12,7 @@ namespace DecodeLabs\Sanctum;
 use DecodeLabs\Archetype;
 use DecodeLabs\Exceptional;
 use DecodeLabs\Glitch\Dumpable;
+use Psr\Http\Message\ResponseInterface;
 use Stringable;
 
 abstract class Definition implements
@@ -792,18 +793,32 @@ abstract class Definition implements
             $this->reportUri !== null &&
             $this->reportTo !== null
         ) {
-            $output['Reporting-Endpoints'] = $this->reportTo . '="' . $this->reportUri . '"';
+            $output['reporting-endpoints'] = $this->reportTo . '="' . $this->reportUri . '"';
         }
 
 
         // CSP
         $header = $this->active ?
-            'Content-Security-Policy' :
-            'Content-Security-Policy-Report-Only';
+            'content-security-policy' :
+            'content-security-policy-report-only';
 
         $output[$header] = implode('; ', $this->exportDirectives());
 
         return $output;
+    }
+
+
+    /**
+     * Apply headers to response
+     */
+    public function applyHeaders(
+        ResponseInterface $response
+    ): ResponseInterface {
+        foreach ($this->exportHeaders() as $name => $value) {
+            $response = $response->withHeader($name, $value);
+        }
+
+        return $response;
     }
 
 
