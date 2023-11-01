@@ -1,3 +1,5 @@
+* Added header export for PSR7 responses
+
 ## v0.1.3 (2023-09-26)
 * Migrated to use effigy in CI workflow
 * Fixed PHP8.1 testing
