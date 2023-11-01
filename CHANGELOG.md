@@ -1,3 +1,4 @@
+## v0.1.4 (2023-11-01)
 * Added header export for PSR7 responses
 
 ## v0.1.3 (2023-09-26)
