@@ -192,8 +192,9 @@ abstract class Definition implements
     /**
      * Load Definition via Archetype
      */
-    public static function load(string $name): Definition
-    {
+    public static function load(
+        string $name
+    ): Definition {
         $class = Archetype::resolve(Definition::class, ucfirst($name));
         return new $class();
     }
@@ -387,8 +388,9 @@ abstract class Definition implements
     /**
      * @return array<string>
      */
-    protected function applyMacro(string $macro): array
-    {
+    protected function applyMacro(
+        string $macro
+    ): array {
         $macro = ltrim($macro, '@');
 
         // Sources
@@ -423,8 +425,9 @@ abstract class Definition implements
     /**
      * Set active
      */
-    public function setActive(bool $active): void
-    {
+    public function setActive(
+        bool $active
+    ): void {
         $this->active = $active;
     }
 
@@ -440,8 +443,9 @@ abstract class Definition implements
     /**
      * Set reporting
      */
-    public function setReportingActive(bool $report): void
-    {
+    public function setReportingActive(
+        bool $report
+    ): void {
         $this->report = $report;
     }
 
@@ -457,8 +461,9 @@ abstract class Definition implements
     /**
      * Set Report URI
      */
-    public function setReportUri(?string $uri): void
-    {
+    public function setReportUri(
+        ?string $uri
+    ): void {
         // TODO: resolve URI
         $this->reportUri = $uri;
     }
@@ -474,8 +479,9 @@ abstract class Definition implements
     /**
      * Set report endpoint name
      */
-    public function setReportEndpointName(?string $name): void
-    {
+    public function setReportEndpointName(
+        ?string $name
+    ): void {
         $this->reportTo = $name;
     }
 
@@ -564,8 +570,9 @@ abstract class Definition implements
         return $hash;
     }
 
-    protected function normalizeAlgorithm(?string $algorithm): string
-    {
+    protected function normalizeAlgorithm(
+        ?string $algorithm
+    ): string {
         if ($algorithm === null) {
             $algorithm = 'sha256';
         }
@@ -588,16 +595,18 @@ abstract class Definition implements
      *
      * @return array<string>
      */
-    public function getDirective(string $directive): ?array
-    {
+    public function getDirective(
+        string $directive
+    ): ?array {
         return $this->directives[$directive] ?? null;
     }
 
     /**
      * Get directive string
      */
-    public function getDirectiveString(string $directive): ?string
-    {
+    public function getDirectiveString(
+        string $directive
+    ): ?string {
         if (!isset($this->directives[$directive])) {
             return null;
         }
