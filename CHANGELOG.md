@@ -1,4 +1,5 @@
 * Made PHP8.1 minimum version
+* Updated dependency list
 
 ## v0.1.4 (2023-11-01)
 * Added header export for PSR7 responses
