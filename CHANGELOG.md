@@ -1,4 +1,5 @@
 * Made PHP8.1 minimum version
+* Updated Archetype dependency
 * Updated dependency list
 
 ## v0.1.4 (2023-11-01)
