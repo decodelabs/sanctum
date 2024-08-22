@@ -16,7 +16,7 @@ use DecodeLabs\Sanctum\Definition;
  */
 class Strict extends Definition
 {
-    public const SCRIPT_SRC = [
+    public const ScriptSrc = [
         '@nonce',
         '@unsafe-inline',
 
@@ -25,11 +25,11 @@ class Strict extends Definition
         '@http'
     ];
 
-    public const OBJECT_SRC = [
+    public const ObjectSrc = [
         '@none'
     ];
 
-    public const BASE_URI = [
+    public const BaseUri = [
         '@self'
     ];
 }

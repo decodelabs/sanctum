@@ -22,86 +22,86 @@ abstract class Definition implements
     /**
      * @var bool
      */
-    public const ACTIVE = true;
+    public const Active = true;
 
     /**
      * @var bool
      */
-    public const REPORT = true;
+    public const Report = true;
 
     /**
      * @var array<string>
      */
-    public const SHARED_SRC = [];
+    public const SharedSrc = [];
 
     # Level 1
 
     /**
      * @var array<string>
      */
-    public const DEFAULT_SRC = ['@shared-src'];
+    public const DefaultSrc = ['@shared-src'];
 
     /**
      * @var array<string>
      */
-    public const SCRIPT_SRC = [];
+    public const ScriptSrc = [];
 
     /**
      * @var array<string>
      */
-    public const STYLE_SRC = [];
+    public const StyleSrc = [];
 
     /**
      * @var array<string>
      */
-    public const IMG_SRC = [];
+    public const ImgSrc = [];
 
     /**
      * @var array<string>
      */
-    public const CONNECT_SRC = [];
+    public const ConnectSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FONT_SRC = [];
+    public const FontSrc = [];
 
     /**
      * @var array<string>
      */
-    public const OBJECT_SRC = [];
+    public const ObjectSrc = [];
 
     /**
      * @var array<string>
      */
-    public const MEDIA_SRC = [];
+    public const MediaSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FRAME_SRC = [];
+    public const FrameSrc = [];
 
     # Level 2
 
     /**
      * @var array<string>
      */
-    public const CHILD_SRC = [];
+    public const ChildSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FORM_ACTION = [];
+    public const FormAction = [];
 
     /**
      * @var array<string>
      */
-    public const FRAME_ANCESTORS = [];
+    public const FrameAncestors = [];
 
     /**
      * @var array<string>
      */
-    public const BASE_URI = [];
+    public const BaseUri = [];
 
 
     # Level 3
@@ -109,22 +109,22 @@ abstract class Definition implements
     /**
      * @var array<string>
      */
-    public const WORKER_SRC = [];
+    public const WorkerSrc = [];
 
     /**
      * @var array<string>
      */
-    public const MANIFEST_SRC = [];
+    public const ManifestSrc = [];
 
     /**
      * @var array<string>
      */
-    public const PREFETCH_SRC = [];
+    public const PrefetchSrc = [];
 
     /**
      * @var array<string>
      */
-    public const NAVIGATE_TO = [];
+    public const NavigateTo = [];
 
 
 
@@ -133,26 +133,26 @@ abstract class Definition implements
     /**
      * @var string|null
      */
-    public const REPORT_URI = null;
+    public const ReportUri = null;
 
     /**
      * @var string|null
      */
-    public const REPORT_TO = null;
+    public const ReportTo = null;
 
 
     /**
      * @var array<string>|bool|null
      */
-    public const SANDBOX = null;
+    public const Sandbox = null;
 
     /**
      * @var array<string>
      */
-    public const PLUGIN_TYPES = [];
+    public const PluginTypes = [];
 
 
-    private const DIRECTIVES = [
+    private const Directives = [
         'shared-src',
 
         'default-src', 'script-src', 'style-src', 'img-src',
@@ -166,7 +166,7 @@ abstract class Definition implements
         'sandbox', 'plugin-types'
     ];
 
-    private const SOURCE_KEYS = [
+    private const SourceKeys = [
         'none', 'self', 'unsafe-inline', 'unsafe-eval',
         'strict-dynamic', 'unsafe-hashes'
     ];
@@ -216,13 +216,13 @@ abstract class Definition implements
     protected function compile(): void
     {
         // Active
-        if (is_bool(static::ACTIVE)) {
-            $this->active = static::ACTIVE;
+        if (is_bool(static::Active)) {
+            $this->active = static::Active;
         }
 
         // Report
-        if (is_bool(static::REPORT)) {
-            $this->report = static::REPORT;
+        if (is_bool(static::Report)) {
+            $this->report = static::Report;
         }
 
 
@@ -230,7 +230,7 @@ abstract class Definition implements
         $class = get_class($this);
 
         // Process static
-        foreach (self::DIRECTIVES as $directive) {
+        foreach (self::Directives as $directive) {
             if (
                 $directive === 'sandbox' ||
                 $directive === 'plugin-types'
@@ -238,7 +238,8 @@ abstract class Definition implements
                 continue;
             }
 
-            $constName = str_replace('-', '_', strtoupper($directive));
+            $constName = ucwords(str_replace('-', ' ', $directive));
+            $constName = str_replace(' ', '', $constName);
             $set = constant($class . '::' . $constName);
 
             if (!is_array($set)) {
@@ -299,14 +300,14 @@ abstract class Definition implements
 
 
         // Report URI
-        if (static::REPORT_URI !== null) {
-            $this->setReportUri(static::REPORT_URI);
+        if (static::ReportUri !== null) {
+            $this->setReportUri(static::ReportUri);
         }
 
 
         // Report to
-        if (static::REPORT_TO !== null) {
-            $this->setReportEndpointName(static::REPORT_TO);
+        if (static::ReportTo !== null) {
+            $this->setReportEndpointName(static::ReportTo);
         }
 
         if (
@@ -320,10 +321,10 @@ abstract class Definition implements
         // Sandbox
         $sandbox = null;
 
-        if (static::SANDBOX === true) {
+        if (static::Sandbox === true) {
             $sandbox = [];
-        } elseif (is_array(static::SANDBOX)) {
-            $sandbox = static::SANDBOX;
+        } elseif (is_array(static::Sandbox)) {
+            $sandbox = static::Sandbox;
         }
 
         if ($sandbox !== null) {
@@ -359,8 +360,8 @@ abstract class Definition implements
 
 
         // Plugin types
-        if (!empty(static::PLUGIN_TYPES)) {
-            $this->directives['plugin-types'] = static::PLUGIN_TYPES;
+        if (!empty(static::PluginTypes)) {
+            $this->directives['plugin-types'] = static::PluginTypes;
         }
     }
 
@@ -394,7 +395,7 @@ abstract class Definition implements
         $macro = ltrim($macro, '@');
 
         // Sources
-        if (in_array($macro, self::DIRECTIVES)) {
+        if (in_array($macro, self::Directives)) {
             return $this->directives[$macro] ?? [];
         }
 
@@ -404,7 +405,7 @@ abstract class Definition implements
         }
 
         // Source keys
-        if (in_array($macro, self::SOURCE_KEYS)) {
+        if (in_array($macro, self::SourceKeys)) {
             return ["'$macro'"];
         }
 
@@ -547,7 +548,7 @@ abstract class Definition implements
             $directive = 'script-src';
         }
 
-        if (!in_array($directive, self::DIRECTIVES)) {
+        if (!in_array($directive, self::Directives)) {
             throw Exceptional::InvalidArgument(
                 'Directive not recognised: ' . $directive
             );

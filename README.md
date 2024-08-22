@@ -32,18 +32,18 @@ use DecodeLabs\Sanctum\Definition;
 class MyCsp extends Definition {
 
     // These items can be reused in other directives
-    const SHARED_SRC = [
+    const SharedSrc = [
         '@self', // Resolves to 'self'
         '*.myotherdomain.com'
     ];
 
     // These items create the default-src directive
-    const DEFAULT_SRC = [
-        '@shared-src', // Import items from SHARED_SRC
+    const DefaultSrc = [
+        '@shared-src', // Import items from SharedSrc
     ];
 
     // These define script sources
-    const SCRIPT_SRC = [
+    const ScriptSrc = [
         '@nonce', // Creates a unique nonce to be used in markup
         '@unsafe-inline', // Resolves to 'unsafe-inline'
 
@@ -53,16 +53,16 @@ class MyCsp extends Definition {
     ];
 
     // These define image sources
-    const IMG_SRC = [
-        '@shared', // Import items from SHARED_SRC
+    const ImgSrc = [
+        '@shared', // Import items from SharedSrc
         '@data', // Resolves to data: for data URLs
         '*.myimagecdn.net',
-        '!*.myotherdomain.com' // Exclude importing from SHARED_SRC
+        '!*.myotherdomain.com' // Exclude importing from SharedSrc
     ];
 
 
     // Report endpoint
-    const REPORT_URI = 'https://mydomain.com/report';
+    const ReportUri = 'https://mydomain.com/report';
 }
 ```
 

@@ -1,3 +1,6 @@
+## v0.2.0 (2024-08-21)
+* Converted consts to PascalCase
+
 ## v0.1.5 (2024-04-26)
 * Made PHP8.1 minimum version
 * Updated Archetype dependency
