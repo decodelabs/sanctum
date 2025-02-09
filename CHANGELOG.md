@@ -1,3 +1,5 @@
+* Added PHP8.4 to CI workflow
+
 ## v0.2.0 (2024-08-21)
 * Converted consts to PascalCase
 
