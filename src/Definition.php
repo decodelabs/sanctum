@@ -19,89 +19,82 @@ abstract class Definition implements
     Stringable,
     Dumpable
 {
-    /**
-     * @var bool
-     */
-    public const Active = true;
-
-    /**
-     * @var bool
-     */
-    public const Report = true;
+    public const bool Active = true;
+    public const bool Report = true;
 
     /**
      * @var array<string>
      */
-    public const SharedSrc = [];
+    public const array SharedSrc = [];
 
     # Level 1
 
     /**
      * @var array<string>
      */
-    public const DefaultSrc = ['@shared-src'];
+    public const array DefaultSrc = ['@shared-src'];
 
     /**
      * @var array<string>
      */
-    public const ScriptSrc = [];
+    public const array ScriptSrc = [];
 
     /**
      * @var array<string>
      */
-    public const StyleSrc = [];
+    public const array StyleSrc = [];
 
     /**
      * @var array<string>
      */
-    public const ImgSrc = [];
+    public const array ImgSrc = [];
 
     /**
      * @var array<string>
      */
-    public const ConnectSrc = [];
+    public const array ConnectSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FontSrc = [];
+    public const array FontSrc = [];
 
     /**
      * @var array<string>
      */
-    public const ObjectSrc = [];
+    public const array ObjectSrc = [];
 
     /**
      * @var array<string>
      */
-    public const MediaSrc = [];
+    public const array MediaSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FrameSrc = [];
+    public const array FrameSrc = [];
 
     # Level 2
 
     /**
      * @var array<string>
      */
-    public const ChildSrc = [];
+    public const array ChildSrc = [];
 
     /**
      * @var array<string>
      */
-    public const FormAction = [];
+    public const array FormAction = [];
 
     /**
      * @var array<string>
      */
-    public const FrameAncestors = [];
+    public const array FrameAncestors = [];
 
     /**
      * @var array<string>
      */
-    public const BaseUri = [];
+    public const array BaseUri = [];
 
 
     # Level 3
@@ -109,50 +102,53 @@ abstract class Definition implements
     /**
      * @var array<string>
      */
-    public const WorkerSrc = [];
+    public const array WorkerSrc = [];
 
     /**
      * @var array<string>
      */
-    public const ManifestSrc = [];
+    public const array ManifestSrc = [];
 
     /**
      * @var array<string>
      */
-    public const PrefetchSrc = [];
+    public const array PrefetchSrc = [];
 
     /**
      * @var array<string>
      */
-    public const NavigateTo = [];
+    public const array NavigateTo = [];
 
 
 
     # Specials
 
     /**
-     * @var string|null
+     * @var ?string
      */
-    public const ReportUri = null;
+    public const ?string ReportUri = null;
 
     /**
-     * @var string|null
+     * @var ?string
      */
-    public const ReportTo = null;
+    public const ?string ReportTo = null;
 
 
     /**
      * @var array<string>|bool|null
      */
-    public const Sandbox = null;
+    public const array|bool|null Sandbox = null;
 
     /**
      * @var array<string>
      */
-    public const PluginTypes = [];
+    public const array PluginTypes = [];
 
 
-    private const Directives = [
+    /**
+     * @var array<string>
+     */
+    private const array Directives = [
         'shared-src',
 
         'default-src', 'script-src', 'style-src', 'img-src',
@@ -166,7 +162,10 @@ abstract class Definition implements
         'sandbox', 'plugin-types'
     ];
 
-    private const SourceKeys = [
+    /**
+     * @var array<string>
+     */
+    private const array SourceKeys = [
         'none', 'self', 'unsafe-inline', 'unsafe-eval',
         'strict-dynamic', 'unsafe-hashes'
     ];
@@ -216,14 +215,10 @@ abstract class Definition implements
     protected function compile(): void
     {
         // Active
-        if (is_bool(static::Active)) {
-            $this->active = static::Active;
-        }
+        $this->active = static::Active;
 
         // Report
-        if (is_bool(static::Report)) {
-            $this->report = static::Report;
-        }
+        $this->report = static::Report;
 
 
         $this->directives = $this->exclude = $macros = [];
@@ -246,6 +241,7 @@ abstract class Definition implements
                 continue;
             }
 
+            /** @var array<string> $set */
             foreach ($set as $value) {
                 // Exlude
                 if (substr($value, 0, 1) === '!') {
@@ -350,7 +346,7 @@ abstract class Definition implements
 
                     default:
                         throw Exceptional::UnexpectedValue(
-                            'Sandbox allow not recognised: ' . $value
+                            message: 'Sandbox allow not recognised: ' . $value
                         );
                 }
 
@@ -418,7 +414,7 @@ abstract class Definition implements
         }
 
         throw Exceptional::UnexpectedValue(
-            'Macro @' . $macro . ' is not recognised'
+            message: 'Macro @' . $macro . ' is not recognised'
         );
     }
 
@@ -550,7 +546,7 @@ abstract class Definition implements
 
         if (!in_array($directive, self::Directives)) {
             throw Exceptional::InvalidArgument(
-                'Directive not recognised: ' . $directive
+                message: 'Directive not recognised: ' . $directive
             );
         }
 
@@ -586,7 +582,7 @@ abstract class Definition implements
         }
 
         throw Exceptional::InvalidArgument(
-            'Unknown hash algorithm: ' . $algorithm
+            message: 'Unknown hash algorithm: ' . $algorithm
         );
     }
 
