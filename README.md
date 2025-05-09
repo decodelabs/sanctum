@@ -11,8 +11,6 @@
 
 Sanctum allows you to create and deploy Content Security Policies with ease. Take the guesswork out of this important security feature.
 
-_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
-
 ---
 
 
