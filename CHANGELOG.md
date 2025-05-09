@@ -1,3 +1,7 @@
+## v0.3.1 (2025-05-09)
+* Upgraded Harvest to v0.5.0
+* Imported Middleware implementation from Harvest
+
 ## v0.3.0 (2025-02-15)
 * Upgraded PHPStan to v2
 * Updated dependencies

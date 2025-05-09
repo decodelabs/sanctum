@@ -13,17 +13,25 @@
 
         "decodelabs/archetype": "^0.3.8",
         "decodelabs/exceptional": "^0.5.3",
+        "decodelabs/monarch": "^0.1.2",
         "decodelabs/glitch-support": "^0.5.1",
 
         "psr/http-message": "^2.0"
     },
     "require-dev": {
+        "decodelabs/harvest": "^0.5",
         "decodelabs/phpstan-decodelabs": "^0.7"
+    },
+    "conflict": {
+        "decodelabs/harvest": "<0.5"
     },
     "autoload": {
         "psr-4": {
-            "DecodeLabs\\Sanctum\\": "src/"
-        }
+            "DecodeLabs\\Sanctum\\": "src/Sanctum/"
+        },
+        "classmap": [
+            "src/Harvest/"
+        ]
     },
     "extra": {
         "branch-alias": {
