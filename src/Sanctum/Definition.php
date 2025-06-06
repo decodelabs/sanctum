@@ -11,7 +11,8 @@ namespace DecodeLabs\Sanctum;
 
 use DecodeLabs\Archetype;
 use DecodeLabs\Exceptional;
-use DecodeLabs\Glitch\Dumpable;
+use DecodeLabs\Nuance\Dumpable;
+use DecodeLabs\Nuance\Entity\NativeObject as NuanceEntity;
 use Psr\Http\Message\ResponseInterface;
 use Stringable;
 
@@ -882,22 +883,18 @@ abstract class Definition implements
     }
 
 
-
-    /**
-     * Export for dump inspection
-     */
-    public function glitchDump(): iterable
+    public function toNuanceEntity(): NuanceEntity
     {
-        yield 'properties' => [
-            '*active' => $this->active,
-            '*report' => $this->report,
-            'report-uri' => $this->reportUri,
-            'report-to' => $this->reportTo
-        ];
+        $entity = new NuanceEntity($this);
+        $entity->setProperty('active', $this->active, 'protected');
+        $entity->setProperty('report', $this->report, 'protected');
+        $entity->setProperty('report-uri', $this->reportUri, virtual: true);
+        $entity->setProperty('report-to', $this->reportTo, virtual: true);
 
         $values = $this->directives;
         unset($values['shared-src']);
+        $entity->values = $values;
 
-        yield 'values' => $values;
+        return $entity;
     }
 }
