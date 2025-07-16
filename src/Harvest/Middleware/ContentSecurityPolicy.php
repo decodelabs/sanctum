@@ -50,12 +50,13 @@ class ContentSecurityPolicy implements HarvestMiddleware
     /**
      * Attempt to load policy
      */
-    protected function loadCsp(): ?SanctumDefinition {
-        if($this->csp) {
+    protected function loadCsp(): ?SanctumDefinition
+    {
+        if ($this->csp) {
             return $this->csp;
         }
 
-        if(
+        if (
             Monarch::$container->has(SanctumDefinition::class) &&
             ($csp = Monarch::$container->get(SanctumDefinition::class)) &&
             $csp instanceof SanctumDefinition
