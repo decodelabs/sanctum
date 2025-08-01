@@ -19,7 +19,7 @@
         "psr/http-message": "^2.0"
     },
     "require-dev": {
-        "decodelabs/harvest": "^0.5.4",
+        "decodelabs/harvest": "^0.6",
         "decodelabs/phpstan-decodelabs": "^0.7"
     },
     "conflict": {
