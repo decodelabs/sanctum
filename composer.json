@@ -11,19 +11,19 @@
     "require": {
         "php": "^8.4",
 
-        "decodelabs/archetype": "^0.3.10",
-        "decodelabs/exceptional": "^0.6.1",
-        "decodelabs/monarch": "^0.1.4",
-        "decodelabs/nuance": "^0.1.2",
+        "decodelabs/archetype": "^0.4",
+        "decodelabs/exceptional": "^0.6.3",
+        "decodelabs/monarch": "^0.2.1",
+        "decodelabs/nuance": "^0.1.9",
 
         "psr/http-message": "^2.0"
     },
     "require-dev": {
-        "decodelabs/harvest": "^0.6",
+        "decodelabs/harvest": "^0.7",
         "decodelabs/phpstan-decodelabs": "^0.7"
     },
     "conflict": {
-        "decodelabs/harvest": "<0.5"
+        "decodelabs/harvest": "<0.7"
     },
     "autoload": {
         "psr-4": {

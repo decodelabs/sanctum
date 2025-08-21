@@ -11,6 +11,7 @@ namespace DecodeLabs\Sanctum;
 
 use DecodeLabs\Archetype;
 use DecodeLabs\Exceptional;
+use DecodeLabs\Monarch;
 use DecodeLabs\Nuance\Dumpable;
 use DecodeLabs\Nuance\Entity\NativeObject as NuanceEntity;
 use Psr\Http\Message\ResponseInterface;
@@ -189,13 +190,11 @@ abstract class Definition implements
     protected array $exclude = [];
 
 
-    /**
-     * Load Definition via Archetype
-     */
     public static function load(
         string $name
     ): Definition {
-        $class = Archetype::resolve(Definition::class, ucfirst($name));
+        $archetype = Monarch::getService(Archetype::class);
+        $class = $archetype->resolve(Definition::class, ucfirst($name));
         return new $class();
     }
 
@@ -206,9 +205,6 @@ abstract class Definition implements
         $this->setup();
     }
 
-    /**
-     *
-     */
     public function setup(): void
     {
     }
@@ -420,45 +416,30 @@ abstract class Definition implements
     }
 
 
-    /**
-     * Set active
-     */
     public function setActive(
         bool $active
     ): void {
         $this->active = $active;
     }
 
-    /**
-     * Is active
-     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
 
-    /**
-     * Set reporting
-     */
     public function setReportingActive(
         bool $report
     ): void {
         $this->report = $report;
     }
 
-    /**
-     * Is reporting active
-     */
     public function isReportingActive(): bool
     {
         return $this->report;
     }
 
 
-    /**
-     * Set Report URI
-     */
     public function setReportUri(
         ?string $uri
     ): void {
@@ -466,34 +447,22 @@ abstract class Definition implements
         $this->reportUri = $uri;
     }
 
-    /**
-     * Get Report URI
-     */
     public function getReportUri(): ?string
     {
         return $this->reportUri;
     }
 
-    /**
-     * Set report endpoint name
-     */
     public function setReportEndpointName(
         ?string $name
     ): void {
         $this->reportTo = $name;
     }
 
-    /**
-     * Get report endpoint name
-     */
     public function getReportEndpointName(): ?string
     {
         return $this->reportTo;
     }
 
-    /**
-     * Set report endpoint
-     */
     public function setReportEndpoint(
         string $name,
         ?string $uri = null
@@ -503,8 +472,6 @@ abstract class Definition implements
     }
 
     /**
-     * Get report endpoint
-     *
      * @return array<string, ?string>|null
      */
     public function getReportEndpoint(): ?array
@@ -519,9 +486,6 @@ abstract class Definition implements
     }
 
 
-    /**
-     * Get random nonce
-     */
     public function getNonce(): string
     {
         if ($this->nonce === null) {
@@ -531,9 +495,6 @@ abstract class Definition implements
         return $this->nonce;
     }
 
-    /**
-     * Add hash for content
-     */
     public function addHash(
         string $hash,
         ?string $directive = null,
@@ -554,9 +515,6 @@ abstract class Definition implements
         $this->directives[$directive][] = "'$algorithm-$hash'";
     }
 
-    /**
-     * Hash content
-     */
     public function hashContent(
         string|Stringable $content,
         ?string $directive = null,
@@ -589,8 +547,6 @@ abstract class Definition implements
 
 
     /**
-     * Get directive
-     *
      * @return array<string>
      */
     public function getDirective(
@@ -599,9 +555,6 @@ abstract class Definition implements
         return $this->directives[$directive] ?? null;
     }
 
-    /**
-     * Get directive string
-     */
     public function getDirectiveString(
         string $directive
     ): ?string {
@@ -776,9 +729,6 @@ abstract class Definition implements
 
 
 
-    /**
-     * Convert to string
-     */
     public function __toString(): string
     {
         return implode('; ', $this->exportDirectives());
@@ -786,8 +736,6 @@ abstract class Definition implements
 
 
     /**
-     * Export headers
-     *
      * @return array<string, string>
      */
     public function exportHeaders(): array
@@ -815,9 +763,6 @@ abstract class Definition implements
     }
 
 
-    /**
-     * Apply headers to response
-     */
     public function applyHeaders(
         ResponseInterface $response
     ): ResponseInterface {
@@ -830,8 +775,6 @@ abstract class Definition implements
 
 
     /**
-     * Export directives
-     *
      * @return array<string, string>
      */
     public function exportDirectives(): array
