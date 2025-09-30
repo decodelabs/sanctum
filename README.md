@@ -16,6 +16,10 @@ Sanctum allows you to create and deploy Content Security Policies with ease. Tak
 
 ## Installation
 
+This package requires PHP 8.4 or higher.
+
+Install via Composer:
+
 ```bash
 composer require decodelabs/sanctum
 ```
