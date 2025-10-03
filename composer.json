@@ -14,7 +14,7 @@
         "decodelabs/archetype": "^0.4",
         "decodelabs/exceptional": "^0.6.3",
         "decodelabs/monarch": "^0.2.1",
-        "decodelabs/nuance": "^0.1.9",
+        "decodelabs/nuance": "^0.2",
 
         "psr/http-message": "^2.0"
     },
