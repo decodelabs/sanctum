@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Harvest
- * @license http://opensource.org/licenses/MIT
+ * Harvest
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);

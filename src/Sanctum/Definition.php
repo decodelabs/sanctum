@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Sanctum
- * @license http://opensource.org/licenses/MIT
+ * Sanctum
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);
